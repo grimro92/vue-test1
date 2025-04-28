@@ -1,15 +1,19 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col>
+        <h1>自己紹介ページ</h1>
+        <p>ここにあなたの自己紹介コンテンツが入ります。</p>
+        <v-btn to="/">ホームに戻る</v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
+<script setup lang="ts">
+// このページ固有の Composition API ロジックがあればここに記述
+</script>
+
+<style scoped>
+/* このページ固有のスタイル */
 </style>
