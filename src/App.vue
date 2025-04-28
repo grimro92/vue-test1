@@ -1,85 +1,65 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <v-app>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <v-app-bar app height="100" color="#102E5D">
+      <v-toolbar-title>
+        <v-img class="nav-logo" :src="logoJaJpg" cover position="center"></v-img>
+      </v-toolbar-title>
+      <div class="d-none d-md-flex">
+        <v-btn class="font-style" to="/about">自己紹介</v-btn>
+        <v-btn class="font-style" to="/work">仕事</v-btn> <v-btn class="font-style" to="/hobby">趣味</v-btn> <v-btn
+          class="font-style" to="/overseas">海外について</v-btn> <v-btn class="font-style" to="/likes">好きなこと</v-btn> <v-btn
+          class="font-style" to="/links">各種リンク</v-btn> <v-btn class="font-style" to="/contact">連絡</v-btn>
+      </div>
+      <v-app-bar-nav-icon class="d-md-none" @click="drawer = !drawer">
+        <v-icon>mdi-menu</v-icon>
+      </v-app-bar-nav-icon>
+    </v-app-bar>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+    <v-navigation-drawer v-model="drawer" temporary right>
+      <v-list>
+        <v-list-item @click="drawer = false" to="/about">自己紹介</v-list-item>
+        <v-list-item @click="drawer = false" to="/work">仕事</v-list-item> <v-list-item @click="drawer = false"
+          to="/hobby">趣味</v-list-item> <v-list-item @click="drawer = false" to="/overseas">海外について</v-list-item>
+        <v-list-item @click="drawer = false" to="/likes">好きなこと</v-list-item> <v-list-item @click="drawer = false"
+          to="/links">各種リンク</v-list-item> <v-list-item @click="drawer = false" to="/contact">連絡</v-list-item> </v-list>
+    </v-navigation-drawer>
 
-  <RouterView />
+    <v-main>
+      <router-view />
+    </v-main>
+
+    <v-footer class="text-center d-flex flex-column">
+      <v-btn to="/"> ^ トップに戻る </v-btn>
+      <div class="pad-12"></div>
+      <div class="pt-0">2025 Takato Aihara / 無断転載を禁じます</div>
+    </v-footer>
+
+  </v-app>
 </template>
 
+<script setup lang="ts">
+import { ref } from "vue";
+// HomeView の直接インポートは不要になります
+// import HomeView from "@/views/HomeView.vue";
+import logoJaJpg from "@/assets/jpg/logo_ja.png";
+
+const drawer = ref(false);
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.nav-logo {
+  height: 100px;
+  width: 200px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.font-style {
+  font-size: 19px;
+  font-family: brandon-grotesque;
+  font-weight: 700;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.pad-12 {
+  padding: 12px;
 }
 </style>
